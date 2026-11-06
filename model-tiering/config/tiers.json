@@ -1,0 +1,46 @@
+{
+  "version": 3,
+  "default": "low",
+  "note": "档位名不写死：每个模型支持的 effort 不同。这里只定「轻=最弱、中=居中、高=最强」的相对位置，实际名字由 map/route 按模型的 efforts 现算。装好后请把 models 改成你自己的模型。",
+  "levels": {
+    "low": {
+      "label": "轻",
+      "rank": "first",
+      "delegate": "none",
+      "signal": "单步、事实问答、格式转换、单文件小改、闲聊"
+    },
+    "mid": {
+      "label": "中",
+      "rank": "middle",
+      "delegate": "allowed",
+      "signal": "2–5 步、读 1–2 个文件、结果可校验"
+    },
+    "high": {
+      "label": "高",
+      "rank": "last",
+      "delegate": "preferred",
+      "signal": "多文件改动、架构/排错、不可逆操作、跨系统"
+    }
+  },
+  "models": {
+    "REPLACE-ME/provider": {
+      "efforts": ["low", "high", "max"],
+      "note": "示例项。把 key 改成 <provider>/<model>，efforts 按从弱到强填你模型真实支持的档位。"
+    }
+  },
+  "classify": {
+    "note": "定档用本地正则跑，不调模型、不耗时。规则顺序见 scripts/tier.mjs 的 classify()。宁可上判，拿不准按中档。",
+    "irreversible": ["删除", "删掉", "清空", "覆盖", "部署", "发布", "上线", "推送", "提交", "群发", "发送给", "重启", "卸载", "格式化", "git push", "rm -rf"],
+    "write": ["改", "修改", "新增", "添加", "创建", "写", "实现", "重构", "修复", "替换", "重命名", "移动", "生成", "导出", "安装", "升级"],
+    "read": ["查", "看", "读", "分析", "解释", "总结", "对比", "列出", "是什么", "为什么", "怎么", "多少"],
+    "risky": ["架构", "设计", "排查", "迁移", "重构", "优化", "安全", "并发", "性能", "兼容"],
+    "codeExt": ["js", "ts", "mjs", "cjs", "tsx", "jsx", "py", "ps1", "json", "yml", "yaml", "html", "css", "vue", "go", "rs", "java"],
+    "multi": ["多个", "三个", "四个", "五个", "这些", "所有", "全部", "批量", "逐个"]
+  },
+  "guard": {
+    "maxUpgradesPerTask": 2,
+    "maxHighPerDay": 6,
+    "noSilentUpgrade": true,
+    "logEveryDelegation": true
+  }
+}

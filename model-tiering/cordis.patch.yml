@@ -1,0 +1,7 @@
+# dsh-model-tiering bundle patch
+# 在插件页显示为一项可开关的能力；关掉它，skill 与档位规则一并消失。
+- insert:
+    - id: dsh-model-tiering
+      name: dsh-model-tiering
+      config:
+        enabled: true
